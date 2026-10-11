@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ravens Playbook Lab</title>
+<meta name="theme-color" content="#241773">
+<meta name="description" content="Offline Baltimore Ravens playbook / film-study board — EXAMPLE formations, animated plays, drive charts, film notes.">
+<style>/*__CSS__*/</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="vignette" aria-hidden="true"></div>
+<div class="field-lines" aria-hidden="true"></div>
+
+<header class="top">
+  <div class="brand">
+    <span class="crest" aria-hidden="true">
+      <svg viewBox="0 0 64 64" width="52" height="52">
+        <defs>
+          <linearGradient id="rPurp" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#3a1fa8"/><stop offset="1" stop-color="#241773"/>
+          </linearGradient>
+          <linearGradient id="rGold" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f5d76e"/><stop offset="1" stop-color="#9e7c0c"/>
+          </linearGradient>
+        </defs>
+        <circle cx="32" cy="32" r="30" fill="url(#rPurp)" stroke="url(#rGold)" stroke-width="2.5"/>
+        <circle cx="32" cy="32" r="22" fill="none" stroke="#fff" stroke-width="1.2" opacity=".3"/>
+        <path d="M18 40 L32 16 L46 40 Z" fill="none" stroke="url(#rGold)" stroke-width="2"/>
+        <text x="32" y="44" text-anchor="middle" font-size="11" font-weight="800" fill="#fff" font-family="system-ui,sans-serif">BAL</text>
+      </svg>
+    </span>
+    <div>
+      <h1>Ravens Playbook Lab</h1>
+      <p class="sub">M&amp;T Bank Stadium · Film study · EXAMPLE plays only</p>
+    </div>
+  </div>
+  <div class="topmeta">
+    <span class="pill purple">AFC North</span>
+    <span class="pill soft" id="demoPill">DEMO / EXAMPLE DATA</span>
+    <button id="btnWall" class="ghost" title="Wall display mode" type="button">Wall</button>
+    <button id="btnHelp" class="ghost" title="About" type="button">?</button>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Playbook screens">
+  <button role="tab" class="tab on" data-tab="home" aria-selected="true" type="button">Playbook</button>
+  <button role="tab" class="tab" data-tab="formation" aria-selected="false" type="button">Formation</button>
+  <button role="tab" class="tab" data-tab="plays" aria-selected="false" type="button">Plays</button>
+  <button role="tab" class="tab" data-tab="drive" aria-selected="false" type="button">Drive Chart</button>
+  <button role="tab" class="tab" data-tab="notes" aria-selected="false" type="button">Film Notes</button>
+</nav>
+
+<main class="stage">
+  <!-- HOME -->
+  <section id="panel-home" class="panel on" role="tabpanel">
+    <div class="hero">
+      <div class="hero-banner">M&amp;T BANK STADIUM · PLAYBOOK LAB</div>
+      <div class="kick-meta">
+        <span>EXAMPLE week label · not a live slate</span>
+        <span>Baltimore · Purple &amp; Black</span>
+      </div>
+      <div class="matchup-hero">
+        <div class="team home-t">
+          <div class="crest-mini">BAL</div>
+          <div class="name">Ravens</div>
+          <div class="rec">EXAMPLE XI</div>
+        </div>
+        <div class="at-block">
+          <div class="vs">FILM</div>
+          <div class="kick-time" id="weekLabel">EXAMPLE · Week Demo</div>
+        </div>
+        <div class="team away-t">
+          <div class="crest-mini opp">OPP</div>
+          <div class="name">Example Opp</div>
+          <div class="rec">placeholder</div>
+        </div>
+      </div>
+      <p class="demo-note">Offline film-study board. All formations, plays, and drive charts are labeled EXAMPLE data — not live stats, injuries, or depth charts.</p>
+    </div>
+
+    <div class="grid-3">
+      <article class="card clickable" data-goto="formation">
+        <h3>Formation Board</h3>
+        <p>SVG field with draggable EXAMPLE personnel packages: 11, 12, and nickel looks. Saved in localStorage.</p>
+        <span class="card-go">Open →</span>
+      </article>
+      <article class="card clickable" data-goto="plays">
+        <h3>Animated Plays</h3>
+        <p>Five EXAMPLE concepts: outside zone, RPO glance, cover-2 slant, bootleg, blitz pickup — play/pause routes.</p>
+        <span class="card-go">Open →</span>
+      </article>
+      <article class="card clickable" data-goto="drive">
+        <h3>Drive Chart</h3>
+        <p>Interactive EXAMPLE drive timeline with field-position bars and click-to-expand coaching notes.</p>
+        <span class="card-go">Open →</span>
+      </article>
+    </div>
+
+    <div class="grid-2" style="margin-top:1rem">
+      <article class="card">
+        <h3>The Nest</h3>
+        <p>M&amp;T Bank Stadium is home of the Baltimore Ravens. Purple/black/gold chrome for this offline board only — no live capacity or ticket feed.</p>
+        <ul class="ticks">
+          <li>Team colors: purple <code>#241773</code>, black, gold</li>
+          <li>Division: AFC North (generic NFL framing)</li>
+          <li>Public branding only — no invented 2025/26 depth chart</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Sunday Watch Habits</h3>
+        <p>Jump to Film Notes for a local checklist and notepad. Habits stay on this device.</p>
+        <button type="button" class="btn gold" data-goto="notes">Open Film Notes</button>
+      </article>
+    </div>
+  </section>
+
+  <!-- FORMATION -->
+  <section id="panel-formation" class="panel" role="tabpanel" hidden>
+    <div class="panel-head">
+      <h2>Formation Board</h2>
+      <p class="hint">Drag EXAMPLE dots · packages are demo personnel only · saved locally</p>
+    </div>
+    <div class="toolbar">
+      <div class="seg" role="group" aria-label="Personnel package">
+        <button type="button" class="seg-btn on" data-pkg="11">11 personnel</button>
+        <button type="button" class="seg-btn" data-pkg="12">12 personnel</button>
+        <button type="button" class="seg-btn" data-pkg="nickel">Nickel look</button>
+      </div>
+      <div class="toolbar-right">
+        <button type="button" class="btn soft" id="btnResetForm">Reset</button>
+        <button type="button" class="btn gold" id="btnSaveForm">Save</button>
+        <span class="save-flash" id="saveFlash" hidden>Saved</span>
+      </div>
+    </div>
+    <div class="field-wrap">
+      <svg id="fieldSvg" viewBox="0 0 560 900" role="img" aria-label="EXAMPLE football field with personnel dots">
+        <defs>
+          <linearGradient id="turf" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#1a5c2e"/><stop offset="1" stop-color="#0d3a1c"/>
+          </linearGradient>
+          <filter id="dotShadow"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity=".5"/></filter>
+        </defs>
+        <rect width="560" height="900" rx="8" fill="url(#turf)"/>
+        <!-- yard lines -->
+        <g id="yardLines" stroke="#fff" stroke-opacity=".22" stroke-width="1.5"></g>
+        <rect x="0" y="0" width="560" height="80" fill="#241773" opacity=".55"/>
+        <rect x="0" y="820" width="560" height="80" fill="#241773" opacity=".55"/>
+        <text x="280" y="48" text-anchor="middle" fill="#f5d76e" font-size="18" font-weight="800" font-family="system-ui,sans-serif" opacity=".8">EXAMPLE END ZONE</text>
+        <text x="280" y="868" text-anchor="middle" fill="#f5d76e" font-size="18" font-weight="800" font-family="system-ui,sans-serif" opacity=".8">EXAMPLE END ZONE</text>
+        <g id="players"></g>
+      </svg>
+      <aside class="legend card">
+        <h3>Package</h3>
+        <p id="pkgBlurb">11 personnel — 1 RB, 1 TE, 3 WR (EXAMPLE).</p>
+        <ul id="pkgRoster" class="roster"></ul>
+        <p class="micro">Drag any purple dot. Positions persist via localStorage until Reset.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PLAYS -->
+  <section id="panel-plays" class="panel" role="tabpanel" hidden>
+    <div class="panel-head">
+      <h2>Animated Plays</h2>
+      <p class="hint">Five EXAMPLE concepts · labeled routes · play / pause</p>
+    </div>
+    <div class="play-layout">
+      <div class="play-list" role="listbox" aria-label="EXAMPLE plays" id="playList"></div>
+      <div class="play-stage card">
+        <div class="play-meta">
+          <h3 id="playTitle">—</h3>
+          <p id="playBlurb" class="hint"></p>
+        </div>
+        <canvas id="playCanvas" width="640" height="480" aria-label="Play animation canvas"></canvas>
+        <div class="play-controls">
+          <button type="button" class="btn gold" id="btnPlayPause">Play</button>
+          <button type="button" class="btn soft" id="btnRestart">Restart</button>
+          <label class="speed-lab">Speed
+            <input type="range" id="playSpeed" min="0.4" max="2" step="0.1" value="1">
+          </label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DRIVE -->
+  <section id="panel-drive" class="panel" role="tabpanel" hidden>
+    <div class="panel-head">
+      <h2>Drive Chart</h2>
+      <p class="hint">EXAMPLE drive timeline · click a bar to expand notes · not a live game log</p>
+    </div>
+    <div class="drive-summary card">
+      <div class="ds-item"><span class="ds-lab">Drives</span><span class="ds-val" id="dsCount">0</span></div>
+      <div class="ds-item"><span class="ds-lab">EXAMPLE pts</span><span class="ds-val" id="dsPts">0</span></div>
+      <div class="ds-item"><span class="ds-lab">Longest</span><span class="ds-val" id="dsLong">—</span></div>
+      <div class="ds-item"><span class="ds-lab">Result mix</span><span class="ds-val" id="dsMix">—</span></div>
+    </div>
+    <div id="driveList" class="drive-list"></div>
+  </section>
+
+  <!-- NOTES -->
+  <section id="panel-notes" class="panel" role="tabpanel" hidden>
+    <div class="panel-head">
+      <h2>Film Notes</h2>
+      <p class="hint">Sunday watch notepad + checklist · stays in localStorage on this device</p>
+    </div>
+    <div class="notes-grid">
+      <article class="card">
+        <h3>Notepad</h3>
+        <textarea id="filmPad" rows="14" placeholder="EXAMPLE film notes — e.g. first-down tendencies, red-zone looks…"></textarea>
+        <div class="toolbar-right" style="margin-top:.6rem">
+          <button type="button" class="btn soft" id="btnClearNotes">Clear</button>
+          <button type="button" class="btn gold" id="btnSaveNotes">Save notes</button>
+          <span class="save-flash" id="notesFlash" hidden>Saved</span>
+        </div>
+      </article>
+      <article class="card">
+        <h3>Sunday Watch Checklist</h3>
+        <ul class="check-list" id="checkList"></ul>
+        <h3 style="margin-top:1.2rem">Watch Habits</h3>
+        <ul class="watch-list" id="watchList"></ul>
+        <button type="button" class="btn soft" id="btnResetChecks" style="margin-top:.8rem">Reset checklist</button>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>Ravens Playbook Lab · offline · 127.0.0.1</span>
+  <span class="foot-demo">EXAMPLE data only · not affiliated with the NFL or Baltimore Ravens</span>
+</footer>
+
+<dialog id="helpDlg">
+  <form method="dialog" class="help-box">
+    <h2>About this board</h2>
+    <p><strong>Public facts:</strong> Baltimore Ravens, M&amp;T Bank Stadium, AFC North, purple <code>#241773</code> / black / gold.</p>
+    <p><strong>EXAMPLE only:</strong> all personnel packages, route animations, drive charts, week labels, and film notes.</p>
+    <p>No live scores, injuries, odds, or real depth charts. Vanilla HTML/CSS/JS · no CDNs.</p>
+    <button type="submit" class="btn gold">Got it</button>
+  </form>
+</dialog>
+
+<script>/*__APP__*/</script>
+</body>
+</html>
